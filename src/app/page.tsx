@@ -1,9 +1,9 @@
-import Link from "next/link";
+import MenuComponent from "@/components/menu/MenuComponent";
 
 export default function Home() {
   return (
     <div>
-      <Link href='/users'>users</Link>
+        <MenuComponent/>
     </div>
   );
 }
