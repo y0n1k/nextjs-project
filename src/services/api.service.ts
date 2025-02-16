@@ -6,6 +6,11 @@ export const getUsers = async (page: string): Promise<{ users: IUser[] }> => {
         .then(value => value.json())
 }
 
+export const getUserByName = async (name: string): Promise<{ users: IUser[] }> => {
+    return await fetch('https://dummyjson.com/users/search?q=' + name)
+        .then(value => value.json())
+}
+
 export const getUserById = async (id: string): Promise<IUser> => {
     return await fetch('https://dummyjson.com/users/' + id)
         .then(response => response.json());
