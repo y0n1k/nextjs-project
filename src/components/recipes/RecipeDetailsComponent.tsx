@@ -1,29 +1,37 @@
 import React from 'react';
 import {IRecipe} from "@/models/recipe/IRecipe";
+import {IUser} from "@/models/user/IUser";
+import UserComponent from "@/components/users/UserComponent";
 
 type RecipeDetailsComponentPropType = {
-    item: IRecipe
+    recipe: IRecipe,
+    user: IUser
 }
 
-const RecipeDetailsComponent = ({item}:RecipeDetailsComponentPropType) => {
+const RecipeDetailsComponent = ({recipe, user}:RecipeDetailsComponentPropType) => {
     return (
             <div>
                 <div>
                     <div>
-                        <b>{item.name}</b>
+                        <h3>{recipe.name}</h3>
+                    </div>
+                    <hr/>
+                    <div>
+                        Складність: {recipe.difficulty}
                     </div>
                     <div>
-                        Складність: {item.difficulty}
+                        Час: {recipe.prepTimeMinutes} хв. підготовки + {recipe.cookTimeMinutes} хв. готування
                     </div>
                     <div>
-                        Час: {item.prepTimeMinutes} хв. підготовки + {item.cookTimeMinutes} хв. готування
+                        Інгридієнти: {recipe.ingredients}
                     </div>
                     <div>
-                        Інгридієнти: {item.ingredients}
+                        Інструкція: {recipe.instructions}
                     </div>
-                    <div>
-                        Інструкція: {item.instructions}
-                    </div>
+                </div>
+                <hr/>
+                <div>
+                    Автор рецепту: <UserComponent item={user}></UserComponent>
                 </div>
         </div>
     );

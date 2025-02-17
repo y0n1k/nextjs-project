@@ -31,13 +31,12 @@ export const getRecipesById = async (id: string): Promise<IRecipe> => {
 }
 
 export const getRecipes = async (page: string): Promise<{ recipes: IRecipe[] }> => {
-    const recipes = await fetch('https://dummyjson.com/recipes?skip=' + page)
+    return await fetch('https://dummyjson.com/recipes?skip=' + page)
         .then(value => value.json())
-    return recipes
 }
 
-export const getRecipesByUserId = async (userId: string): Promise<IRecipe[]> => {
-    return await fetch('https://dummyjson.com/recipes?userId=' + userId)
+export const getRecipesByUserId = async (userId: string): Promise<IRecipe> => {
+    return await fetch('https://dummyjson.com/recipes?limit=50')
         .then(value => value.json())
-        .then(data => data.recipes.filter((recipe:IRecipe) => recipe.userId.toString() === userId))
+        .then(data => data.recipes.filter((recipe: IRecipe) => recipe.userId.toString() === userId))
 }

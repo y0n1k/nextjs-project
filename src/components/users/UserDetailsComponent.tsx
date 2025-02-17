@@ -1,28 +1,37 @@
 import React from 'react';
 import {IUser} from "@/models/user/IUser";
+import {IRecipe} from "@/models/recipe/IRecipe";
+import RecipeComponent from "@/components/recipes/RecipeComponent";
 
 type UserDetailsComponentPropType = {
-    item: IUser
+    user: IUser,
+    recipe: IRecipe
 }
 
-const UserDetailsComponent = ({item}:UserDetailsComponentPropType) => {
+const UserDetailsComponent = ({user, recipe}: UserDetailsComponentPropType) => {
+
     return (
         <div>
             <div>
-                <h3>{item.firstName} {item.lastName}</h3>
-                <img src={item.image} alt=""/>
+                <h3>{user.firstName} {user.lastName}</h3>
+                <img src={user.image} alt=""/>
+                <hr/>
                 <div>
-                    Вік: {item.age}
+                    Вік: {user.age}
                 </div>
                 <div>
-                    Посада: {item.role}
+                    Посада: {user.role}
                 </div>
                 <div>
-                    Дата народження: {item.birthDate}
+                    Дата народження: {user.birthDate}
                 </div>
                 <div>
-                    Місце проживання: {item.address.address} {item.address.city} {item.address.country}
+                    Місце проживання: {user.address.address} {user.address.city} {user.address.country}
                 </div>
+            </div>
+            <hr/>
+            <div>
+                Рецепти: <RecipeComponent item={recipe}></RecipeComponent>
             </div>
         </div>
     );

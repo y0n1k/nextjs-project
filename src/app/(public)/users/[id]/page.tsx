@@ -1,24 +1,25 @@
 import React, {FC} from 'react';
-import {SearchParams} from "next/dist/server/request/search-params";
-import {getUserById, getUserByName} from "@/services/api.service";
-import {IUser} from "@/models/user/IUser";
+import {getRecipesByUserId, getUserById} from "@/services/api.service";
 import UserDetailsComponent from "@/components/users/UserDetailsComponent";
 
 type Props = {
-    params: {id:string}
+    params: { id: string }
 }
 
 const UserPage: FC<Props> = async ({params}) => {
 
     const {id} = await params;
-    // const name =  nameParam.name as string
     console.log(id)
+    console.log(typeof id)
     const user = await getUserById(id)
-    // console.log(users)
-    // console.log(typeof users)
+    const recipes = await getRecipesByUserId(id)
+    console.log(recipes)
+    const [recipe] = recipes
+    console.log(recipe);
+
     return (
         <div>
-<UserDetailsComponent item={user} key={user.id}></UserDetailsComponent>
+            <UserDetailsComponent user={user} recipe={recipe} key={user.id}></UserDetailsComponent>
 
         </div>
     );
