@@ -1,23 +1,37 @@
 'use client'
 
-import {useSearchParams} from "react-router-dom";
+import {useRouter, useSearchParams} from "next/navigation";
+
 
 const PaginationComponent = () => {
-    const [searchParams, setSearchParams] = useSearchParams();
-    const skip = parseInt(searchParams.get('skip') ?? '0', 10);
 
-    const handleNext = () => {
-        setSearchParams({ skip: skip + 30 });
+    const router = useRouter();
+    const searchParams = useSearchParams();
+
+    const addPageParameter = () => {
+        const currentPage = parseInt(searchParams.get("skip") || "0", 10);
+        const newPage = currentPage + 30;
+
+        const params = new URLSearchParams(searchParams);
+        params.set("skip", newPage.toString());
+
+        router.push(`?${params.toString()}`);
     };
 
-    const handlePrev = () => {
-        setSearchParams({ skip: Math.max(0, skip - 30) });
+    const decreasePageParameter = () => {
+        const currentPage = parseInt(searchParams.get("skip") || "0", 10);
+        const newPage = Math.max(currentPage - 30, 0);
+
+        const params = new URLSearchParams(searchParams);
+        params.set("skip", newPage.toString());
+
+        router.push(`?${params.toString()}`);
     };
 
     return (
         <div>
-            <button onClick={handlePrev} disabled={skip === 0}>Назад</button>
-            <button onClick={handleNext} >Вперед</button>
+            <button onClick={decreasePageParameter}>Назад</button>
+            <button onClick={addPageParameter}>Вперед</button>
         </div>
     );
 };
