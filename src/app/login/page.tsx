@@ -20,24 +20,21 @@ const LoginPage = () => {
         const handleSubmit = async (event:FormEvent) => {
             event.preventDefault();
             try {
-                // Викликаємо функцію login
                 await login({
                     username: username,
                     password: password,
-                    expiresInMins: 60, // Задаємо час сесії
+                    expiresInMins: 60,
                 });
 
-                // Перевіряємо, чи з'явився користувач у localStorage
                 const user = localStorage.getItem('user');
                 if (user) {
-                    // Перенаправляємо користувача на головну сторінку
                     router.push("/");
                 } else {
-                    alert("Не вдалося увійти. Будь ласка, перевірте ваші дані.");
+                    alert("Не вдалося увійти");
                 }
             } catch (error) {
                 console.error("Помилка входу:", error);
-                alert("Невірне ім'я користувача або пароль.");
+                alert("Неправильне ім'я або пароль");
             }
         }
 

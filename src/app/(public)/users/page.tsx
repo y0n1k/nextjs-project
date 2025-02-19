@@ -5,7 +5,7 @@ import SearchComponent from "@/components/search/SearchComponent";
 import PaginationComponent from "@/pagination/PaginationComponent";
 
 type Props = {
-    searchParams: SearchParams
+    searchParams: Promise<SearchParams>
 }
 
 const UsersPage: FC<Props> = async ({searchParams}) => {

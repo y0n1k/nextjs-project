@@ -1,12 +1,11 @@
 import React, {FC} from 'react';
 import {SearchParams} from "next/dist/server/request/search-params";
-import {getRecipesById, getRecipesByName, getUserById} from "@/services/api.service";
-import {IRecipe} from "@/models/recipe/IRecipe";
+import {getRecipesById, getUserById} from "@/services/api.service";
 import RecipeDetailsComponent from "@/components/recipes/RecipeDetailsComponent";
 
 type Props = {
-    searchParams: SearchParams,
-    params: {id:string}
+    searchParams: Promise<SearchParams>,
+    params: Promise<{id:string}>
 }
 
 const RecipePage: FC<Props> = async ({searchParams, params}) => {

@@ -3,7 +3,7 @@ import {getRecipesByUserId, getUserById} from "@/services/api.service";
 import UserDetailsComponent from "@/components/users/UserDetailsComponent";
 
 type Props = {
-    params: { id: string }
+    params: Promise<{ id: string }>
 }
 
 const UserPage: FC<Props> = async ({params}) => {

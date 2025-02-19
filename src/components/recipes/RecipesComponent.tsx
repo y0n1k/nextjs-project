@@ -4,10 +4,10 @@ import {IRecipe} from "@/models/recipe/IRecipe";
 import RecipeComponent from "@/components/recipes/RecipeComponent";
 
 type Props = {
-    skip:string
+    skip: string
 }
 
-const RecipesComponent = async ({skip}:Props) => {
+const RecipesComponent = async ({skip}: Props) => {
 
 
     const {recipes} = await getRecipes(skip);
@@ -15,8 +15,12 @@ const RecipesComponent = async ({skip}:Props) => {
 
     return (
         <div>
-            {
+            {recipes ? (
                 recipes.map((recipe: IRecipe) => <RecipeComponent item={recipe} key={recipe.id}></RecipeComponent>)
+            ) : (
+                <div></div>
+            )
+
             }
         </div>
     );
