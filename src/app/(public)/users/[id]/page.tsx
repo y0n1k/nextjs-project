@@ -14,13 +14,13 @@ const UserPage: FC<Props> = async ({params}) => {
     const user = await getUserById(id)
     const recipes = await getRecipesByUserId(id)
     console.log(recipes)
+    console.log(typeof recipes)
     const [recipe] = recipes
     console.log(recipe);
 
     return (
         <div>
             <UserDetailsComponent user={user} recipe={recipe} key={user.id}></UserDetailsComponent>
-
         </div>
     );
 };

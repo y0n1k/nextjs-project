@@ -1,5 +1,7 @@
 import {IUser} from "@/models/user/IUser";
 import {IRecipe} from "@/models/recipe/IRecipe";
+import axios from "axios";
+import {IUserWithToken} from "@/models/login/IUserWithToken";
 
 export const getUsers = async (page: string): Promise<{ users: IUser[] }> => {
     return await fetch('https://dummyjson.com/users?skip=' + page)
@@ -35,8 +37,31 @@ export const getRecipes = async (page: string): Promise<{ recipes: IRecipe[] }> 
         .then(value => value.json())
 }
 
-export const getRecipesByUserId = async (userId: string): Promise<IRecipe> => {
-    return await fetch('https://dummyjson.com/recipes?limit=50')
+export const getRecipesByUserId = async (userId: string): Promise<IRecipe[]> => {
+    return await fetch('https://dummyjson.com/recipes?limit=100')
         .then(value => value.json())
         .then(data => data.recipes.filter((recipe: IRecipe) => recipe.userId.toString() === userId))
+}
+
+const axiosInstance = axios.create({
+    baseURL: 'https://dummyjson.com/auth',
+    headers: {}
+})
+
+type LoginData = {
+    username: string,
+    password: string,
+    expiresInMins: number
+}
+
+export const login = async ({username, password, expiresInMins}: LoginData) => {
+    try {
+        const {data: userWithToken} = await axiosInstance.post<IUserWithToken>('login', {username, password, expiresInMins})
+        console.log(userWithToken);
+        localStorage.setItem('user', JSON.stringify(userWithToken));
+    }
+    catch(e:unknown) {
+        console.log('Error: ', e)
+    }
+
 }

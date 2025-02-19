@@ -17,6 +17,8 @@ const SearchPage: FC<Props> = async ({searchParams}) => {
     console.log(recipes);
     const {users} = await getUserByName(name as string)
     console.log(users);
+
+
     return (
         <div>
             searchPage!

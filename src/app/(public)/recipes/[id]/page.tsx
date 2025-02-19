@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {SearchParams} from "next/dist/server/request/search-params";
-import {getRecipesByName, getUserById} from "@/services/api.service";
+import {getRecipesById, getRecipesByName, getUserById} from "@/services/api.service";
 import {IRecipe} from "@/models/recipe/IRecipe";
 import RecipeDetailsComponent from "@/components/recipes/RecipeDetailsComponent";
 
@@ -16,12 +16,12 @@ const RecipePage: FC<Props> = async ({searchParams, params}) => {
     const {id} = await params;
     console.log(id);
     console.log(name)
-    const {recipes} = await getRecipesByName(name)
-    console.log(recipes)
-    console.log(typeof recipes)
-
-    const [recipe] = recipes
+    const recipe = await getRecipesById(id)
     console.log(recipe)
+    console.log(typeof recipe)
+
+    // const [recipe] = recipes
+    // console.log(recipe)
     const user = await getUserById(recipe.userId.toString())
     console.log(user);
 
@@ -29,7 +29,7 @@ const RecipePage: FC<Props> = async ({searchParams, params}) => {
     return (
         <div>
             {
-                recipes.map((recipe:IRecipe) => <RecipeDetailsComponent recipe={recipe} user={user} key={recipe.id}></RecipeDetailsComponent> )
+                <RecipeDetailsComponent recipe={recipe} user={user} key={recipe.id}></RecipeDetailsComponent>
             }
         </div>
     );

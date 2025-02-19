@@ -30,9 +30,16 @@ const UserDetailsComponent = ({user, recipe}: UserDetailsComponentPropType) => {
                 </div>
             </div>
             <hr/>
-            <div>
-                Рецепти: <RecipeComponent item={recipe}></RecipeComponent>
-            </div>
+            {
+                recipe ? (
+                    <div>
+                        Рецепти: <RecipeComponent item={recipe}></RecipeComponent>
+                    </div>
+                ) : (
+                    <div>Рецептів немає :(</div>
+                )
+            }
+
         </div>
     );
 };
