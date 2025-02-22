@@ -1,5 +1,8 @@
 import React, {FC} from 'react';
 import {SearchParams} from "next/dist/server/request/search-params";
+import RecipesComponent from "@/components/recipes/RecipesComponent";
+import PaginationComponent from "@/pagination/PaginationComponent";
+import SearchComponent from "@/components/search/SearchComponent";
 
 type Props = {
     searchParams: Promise<SearchParams>
@@ -13,7 +16,10 @@ const RecipesPage: FC<Props> = async ({searchParams}) => {
 
     return (
         <div>
-            Tag page
+            {/*Tag page*/}
+            <SearchComponent></SearchComponent>
+            <RecipesComponent skip={skip}/>
+            <PaginationComponent/>
         </div>
     );
 };

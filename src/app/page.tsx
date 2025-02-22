@@ -7,7 +7,7 @@ export default function Home() {
 
     return (
         <div>
-            <MenuComponent/>
+            {/*<MenuComponent/>*/}
         </div>
     );
 }
