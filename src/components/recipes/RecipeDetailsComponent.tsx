@@ -2,6 +2,7 @@ import React from 'react';
 import {IRecipe} from "@/models/recipe/IRecipe";
 import {IUser} from "@/models/user/IUser";
 import UserComponent from "@/components/users/UserComponent";
+import RecipeTagsComponent from "@/components/recipes/RecipeTagsComponent";
 
 type RecipeDetailsComponentPropType = {
     recipe: IRecipe,
@@ -14,6 +15,7 @@ const RecipeDetailsComponent = ({recipe, user}:RecipeDetailsComponentPropType) =
                 <div>
                     <div>
                         <h3>{recipe.name}</h3>
+                        <RecipeTagsComponent tags={recipe.tags}/>
                     </div>
                     <hr/>
                     <div>

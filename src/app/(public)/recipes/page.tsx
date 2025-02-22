@@ -10,15 +10,16 @@ type Props = {
 
 const RecipesPage: FC<Props> = async ({searchParams}) => {
 
-    const skipParam = await searchParams;
-    const skip = skipParam.skip as string;
+    const params = await searchParams;
+    const skip = params.skip as string;
+    const tag = params.tag as string | undefined;
     console.log("Skip value:", skip);
+    console.log("Tag value:", tag);
 
     return (
         <div>
-            {/*Tag page*/}
             <SearchComponent></SearchComponent>
-            <RecipesComponent skip={skip}/>
+            <RecipesComponent skip={skip} tag={tag}/>
             <PaginationComponent/>
         </div>
     );
